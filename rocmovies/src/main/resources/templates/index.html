@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RocMovies - Cinéma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animation for fading in */
+        .fadeIn {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Hover effect for movie cards */
+        .card-hover:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans antialiased">
+
+    <!-- Section Header -->
+    <div th:include="header :: header"></div>
+
+    <!-- Section d'introduction -->
+    <section class="relative bg-cover bg-center h-screen text-white flex items-center justify-center overflow-hidden" style="background-image: url('https://www.example.com/cinema-banner.jpg');">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="relative z-10 text-center fadeIn">
+            <h1 class="text-5xl sm:text-6xl font-bold mb-6 leading-tight tracking-wide">Bienvenue dans l'univers de RocMovies</h1>
+            <p class="text-xl sm:text-2xl mb-8">Une expérience cinématographique au-delà de vos attentes.</p>
+            <a href="#movies" class="bg-yellow-500 text-black px-8 py-3 rounded-full text-lg font-semibold hover:bg-yellow-400 transition-all">Découvrez nos films</a>
+        </div>
+    </section>
+
+    <!-- Section des films à l'affiche -->
+    <section id="movies" class="py-16 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-yellow-500 mb-10">Films à l'affiche</h2>
+
+            <div class="mb-6">
+                <label for="movie-style" class="block text-gray-300 text-lg mb-2">Choisissez un style</label>
+                <select id="movie-style" name="movie-style" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
+                    <option selected="true" disabled="disabled" value="">Styles disponible</option>
+                    <div th:each="style : ${styles}">
+                        <option th:text="${style.name}" th:value="${style.name}"></option>
+                    </div>
+                </select>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            
+                <div th:each="movie : ${movies}" class="transition-all duration-300 hover:scale-110 py-6 flex flex-col justify-center sm:py-12">
+                    <div th:include="movie-card :: movie-card(movie=${movie})"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Footer -->
+    <div th:include="footer :: footer"></div>
+
+
+    <script type="text/javascript" th:src="@{js/script.js}"></script>
+
+</body>
+</html>

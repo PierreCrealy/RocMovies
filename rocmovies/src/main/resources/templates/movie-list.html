@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RocMovies - Cinéma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animation for fading in */
+        .fadeIn {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Hover effect for movie cards */
+        .card-hover:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans antialiased">
+
+    <!-- Section Header -->
+    <div th:include="header :: header"></div>
+
+    <!-- Section des films à l'affiche -->
+    <section id="movies" class="py-16 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-yellow-500 mb-10">Films à l'affiche</h2>
+
+            <div class="mb-6">
+                <div class="mb-6">
+                
+                    <form th:action="@{/movie}" method="get">
+                        <label for="style" class="block text-gray-300 text-lg mb-2">Choisissez un style</label>
+                        <select id="movie-style" name="style" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
+                            <option selected="true" disabled="disabled" value="">Styles disponible</option>
+                            <div th:each="style : ${styles}">
+                                <option th:text="${style.name}" th:value="${style.name}"></option>
+                            </div>
+                        </select>
+                
+                        <button type="submit" class="py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
+                            Soumettre
+                        </button>
+                    </form>
+
+                </div>
+                
+            </div>
+
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            
+                <div th:each="movie : ${movies}" class="transition-all duration-300 hover:scale-110 py-6 flex flex-col justify-center sm:py-12">
+                    <div th:include="movie-card :: movie-card(movie=${movie})"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Footer -->
+    <div th:include="footer :: footer"></div>
+
+    <script type="text/javascript" th:src="@{js/script.js}"></script>
+    
+</body>
+</html>

@@ -1,0 +1,15 @@
+
+<div th:fragment="movie-card (movie)">
+
+    <div class="card-hover bg-gray-700 rounded-lg shadow-2xl overflow-hidden transform transition-all hover:scale-105">
+        <img th:src="${movie.imageSrc}" alt="Film 2" class="w-full h-96 object-cover">
+        <div class="p-6">
+            <h3 th:text="${movie.title}" class="text-2xl font-bold text-yellow-400 mb-4"></h3>
+            <p th:text="${movie.style}" class="text-lg text-gray-300 mb-6"></p>
+            <a th:href="@{/movie/{id}(id=${movie.idMovie})}" class="w-full p-3 bg-yellow-500 text-black rounded-full font-semibold hover:bg-yellow-400 transition-all">
+                Plus d'informations
+            </a>
+        </div>
+    </div>
+
+</div>
