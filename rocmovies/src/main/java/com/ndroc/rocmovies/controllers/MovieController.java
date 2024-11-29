@@ -32,7 +32,7 @@ public class MovieController {
 
 
     @GetMapping()
-    public String getListMovies(@RequestParam(name = "style") Optional<MovieStyles> movieStyle, Model mode, Model model) {
+    public String getListMovies(@RequestParam(name = "style") Optional<MovieStyles> movieStyle, Model model) {
 
         List<Movie> movies = movieService.getListMovies();
         List<MovieStyles> styles = Arrays.asList(MovieStyles.class.getEnumConstants());
@@ -68,10 +68,9 @@ public class MovieController {
        
     }
 
-
     
     @GetMapping("/adding")
-    public String getListMovies(Model mode, Model model) {
+    public String addMovie(Model model) {
 
         List<MovieStyles> styles = Arrays.asList(MovieStyles.class.getEnumConstants());
         model.addAttribute("styles", styles);
@@ -84,7 +83,7 @@ public class MovieController {
 
     
     @PostMapping
-    public String postMethodName(
+    public String postAddMovie(
         @Valid
         @RequestParam Integer idMovie,
         @RequestParam String title,
@@ -101,13 +100,8 @@ public class MovieController {
         
        movieService.addMovie(movie);
 
-       List<Movie> movies = movieService.getListMovies();
-       List<MovieStyles> styles = Arrays.asList(MovieStyles.class.getEnumConstants());
 
-       model.addAttribute("movies", movies);
-       model.addAttribute("styles", styles);
-
-       return "movie-list.html";
+       return this.getListMovies(java.util.Optional.empty(), model);
     }
     
     

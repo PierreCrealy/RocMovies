@@ -15,4 +15,5 @@ public interface IMovieService {
     Optional<Movie> getMovieById(long id);
 
     void addMovie(Movie movie);
+
 }

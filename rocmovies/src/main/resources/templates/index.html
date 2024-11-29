@@ -27,7 +27,7 @@
 <body class="bg-gray-900 text-white font-sans antialiased">
 
     <!-- Section Header -->
-    <div th:include="header :: header"></div>
+    <div th:include="fragments/header :: header"></div>
 
     <!-- Section d'introduction -->
     <section class="relative bg-cover bg-center h-screen text-white flex items-center justify-center overflow-hidden" style="background-image: url('https://www.example.com/cinema-banner.jpg');">
@@ -57,7 +57,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
             
                 <div th:each="movie : ${movies}" class="transition-all duration-300 hover:scale-110 py-6 flex flex-col justify-center sm:py-12">
-                    <div th:include="movie-card :: movie-card(movie=${movie})"></div>
+                    <div th:include="fragments/movie-card :: movie-card(movie=${movie})"></div>
                 </div>
 
             </div>
@@ -65,7 +65,7 @@
     </section>
 
     <!-- Section Footer -->
-    <div th:include="footer :: footer"></div>
+    <div th:include="fragments/footer :: footer"></div>
 
 
     <script type="text/javascript" th:src="@{js/script.js}"></script>
